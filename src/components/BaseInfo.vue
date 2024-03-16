@@ -62,9 +62,9 @@ const props = defineProps({
 }
 
 .rank-xs {
-  width: 55px;
-  height: 55px;
-  font-size: 32px;
+  width: 45px;
+  height: 45px;
+  font-size: 28px;
   font-weight: 600;
 }
 
