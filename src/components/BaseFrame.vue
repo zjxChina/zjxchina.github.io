@@ -73,4 +73,16 @@ const props = defineProps({
 .el-backtop {
   color: #ff7f7f;
 }
+
+@media (max-width: 992px) {
+  .main-layout {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .common-layout {
+    width: 100%;
+  }
+}
 </style>

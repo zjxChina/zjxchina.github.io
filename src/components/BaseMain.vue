@@ -71,7 +71,6 @@ const numArray = function (totalNum, nowNum) {
         </template>
       </el-dropdown>
 
-
     </template>
 
     <el-tabs type="border-card" :stretch="true" class="tabs">
