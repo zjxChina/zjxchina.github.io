@@ -81,7 +81,12 @@ const numArray = function (totalNum, nowNum) {
         <BaseInfo :data="data['pk']" />
       </el-tab-pane>
       <el-tab-pane label="副榜">
-        <BaseInfo :data="data['fb']" />
+        <template v-if="data['fb_flag']">
+          <BaseInfo :data="data['fb']" />
+        </template>
+        <template v-else>
+          <el-empty description="本期稿件过少，没有副榜" />
+        </template>
       </el-tab-pane>
     </el-tabs>
 
