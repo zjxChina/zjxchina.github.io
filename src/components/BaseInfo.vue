@@ -27,13 +27,19 @@ const props = defineProps({
           <div class="descriptions">
             <el-descriptions>
               <el-descriptions-item label="总分">{{ item['score'] }}</el-descriptions-item>
-              <el-descriptions-item label="发布时间" span="2">{{ item['pubdate_str'] }}</el-descriptions-item>
+              <el-descriptions-item label="UP主" span="2">
+                <a class="text-body text-decoration-none text-start" 
+                  :href="'https://space.bilibili.com/' + item['mid']" target="_blank">
+                  {{ item['author'] }}
+                </a>
+              </el-descriptions-item>
               <el-descriptions-item label="播放" width="145">{{ item['view'] }}</el-descriptions-item>
               <el-descriptions-item label="收藏" width="145">{{ item['favorite'] }}</el-descriptions-item>
               <el-descriptions-item label="评论" width="145">{{ item['reply'] }}</el-descriptions-item>
               <el-descriptions-item label="硬币">{{ item['coin'] }}</el-descriptions-item>
               <el-descriptions-item label="弹幕">{{ item['danmaku'] }}</el-descriptions-item>
               <el-descriptions-item label="点赞">{{ item['like'] }}</el-descriptions-item>
+              <el-descriptions-item label="发布时间" span="3">{{ item['pubdate_str'] }}</el-descriptions-item>
             </el-descriptions>
           </div>
         </el-col>
