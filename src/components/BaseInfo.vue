@@ -25,10 +25,10 @@ const props = defineProps({
             </a>
           </div>
           <div class="descriptions">
-            <el-descriptions>
+            <el-descriptions :column="3">
               <el-descriptions-item label="总分">{{ item['score'] }}</el-descriptions-item>
               <el-descriptions-item label="UP主" span="2">
-                <a class="text-body text-decoration-none text-start" 
+                <a class="author-color text-decoration-none text-start" 
                   :href="'https://space.bilibili.com/' + item['mid']" target="_blank">
                   {{ item['author'] }}
                 </a>
@@ -86,6 +86,10 @@ const props = defineProps({
 .cover-image {
   width: 75%;
   margin: auto;
+}
+
+.author-color {
+  color: var(--el-text-color-regular);
 }
 
 @media (max-width: 768px) {

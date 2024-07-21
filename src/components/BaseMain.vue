@@ -62,11 +62,13 @@ const numArray = function (totalNum, nowNum) {
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-for="i in numArray(data['total_num'], data['num'])">
-              <router-link :to="{ name: 'weekly', params: { num: i } }" class="text-body text-decoration-none">
-                {{ '乐正绫新曲排行榜#' + i }}
-              </router-link>
-            </el-dropdown-item>
+            <el-scrollbar max-height="400px">
+              <el-dropdown-item v-for="i in numArray(data['total_num'], data['num'])">
+                <router-link :to="{ name: 'weekly', params: { num: i } }" class="text-body text-decoration-none">
+                  {{ '乐正绫新曲排行榜#' + i }}
+                </router-link>
+              </el-dropdown-item>
+            </el-scrollbar>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

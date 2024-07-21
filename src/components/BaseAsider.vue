@@ -60,13 +60,15 @@ const getCover = function (nowNum) {
     <template #header>
       <div class="text-body card-header-font">往期</div>
     </template>
-    <div class="list-group list-group-flush text-center">
-      <span v-for="i in numArray(data['total_num'], data['num'])">
-        <router-link :to="{ name: 'weekly', params: { num: i } }" class="card-a list-group-item list-group-item-action">
-          {{ '乐正绫新曲排行榜#' + i }}
-        </router-link>
-      </span>
-    </div>
+    <el-scrollbar max-height="550px">
+      <div class="list-group list-group-flush text-center">
+        <span v-for="i in numArray(data['total_num'], data['num'])">
+          <router-link :to="{ name: 'weekly', params: { num: i } }" class="card-a list-group-item list-group-item-action">
+            {{ '乐正绫新曲排行榜#' + i }}
+          </router-link>
+        </span>
+      </div>
+    </el-scrollbar>
   </el-card>
 
 </template>
