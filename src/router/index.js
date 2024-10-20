@@ -14,6 +14,11 @@ const router = createRouter({
       path: '/weekly/:num',
       name: 'weekly',
       component: () => import('@/views/WeeklyView.vue')
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: '404',
+      component: () => import('@/views/NotFound.vue')
     }
   ]
 })
