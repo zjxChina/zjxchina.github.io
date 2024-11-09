@@ -80,14 +80,19 @@ const numArray = function (totalNum, nowNum) {
         <BaseInfo :data="data['zb']" />
       </el-tab-pane>
       <el-tab-pane label="PICK UP">
-        <BaseInfo :data="data['pk']" />
+        <template v-if="data['pk_flag']">
+          <BaseInfo :data="data['pk']" />
+        </template>
+        <template v-else>
+          <el-empty description="本期无新曲推荐" />
+        </template>
       </el-tab-pane>
       <el-tab-pane label="副榜">
         <template v-if="data['fb_flag']">
           <BaseInfo :data="data['fb']" />
         </template>
         <template v-else>
-          <el-empty description="本期稿件过少，没有副榜" />
+          <el-empty description="本期稿件过少，无副榜" />
         </template>
       </el-tab-pane>
     </el-tabs>
