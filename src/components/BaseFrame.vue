@@ -16,7 +16,9 @@ const props = defineProps({
   <el-backtop :right="100" :bottom="100" />
   <el-container class="common-layout">
     <el-header>
-      <BaseHeader />
+      <router-link :to="{ name: 'home' }">
+        <BaseHeader />
+      </router-link>
     </el-header>
     <el-container class="main-aside-layout">
         <el-main class="main-layout">
