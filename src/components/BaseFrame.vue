@@ -8,7 +8,6 @@ import BaseAsider from './BaseAsider.vue'
 
 const route = useRoute()
 const router = useRouter()
-const loading = ref(true)
 const data = ref(null)
 const num = ref(null)
 
