@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import WeeklyView from '../views/WeeklyView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,13 +11,17 @@ const router = createRouter({
     {
       path: '/weekly/:num',
       name: 'weekly',
-      component: () => import('@/views/WeeklyView.vue')
+      component: () => import('@/views/HomeView.vue')
     },
     {
-      path: '/:catchAll(.*)',
-      name: '404',
+      path: '/404',
+      name: 'NotFound',
       component: () => import('@/views/NotFound.vue')
-    }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404'
+    },
   ]
 })
 

@@ -39,7 +39,7 @@ const props = defineProps({
               <el-descriptions-item label="硬币">{{ item['coin'] }}</el-descriptions-item>
               <el-descriptions-item label="弹幕">{{ item['danmaku'] }}</el-descriptions-item>
               <el-descriptions-item label="点赞">{{ item['like'] }}</el-descriptions-item>
-              <el-descriptions-item label="发布时间" span="3">{{ item['pubdate_str'] }}</el-descriptions-item>
+              <el-descriptions-item label="发布时间" span="3">{{ item['pubdate'] }}</el-descriptions-item>
             </el-descriptions>
           </div>
         </el-col>

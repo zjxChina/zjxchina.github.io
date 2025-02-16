@@ -1,39 +1,9 @@
 <script setup>
-import { ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { ArrowDown } from '@element-plus/icons-vue'
-import axios from "axios"
 import BaseInfo from './BaseInfo.vue';
 
-const props = defineProps({
-  num: {
-    type: Number,
-    required: true
-  }
-})
-
-const data = ref({})
-watch(() => props.num,
-  (newNum) => {
-    const jsonUrl = "/data/" + newNum + ".json"
-    axios.get(jsonUrl)
-      .then(response => {
-        data.value = response.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-)
-
-const jsonUrl = "/data/" + props.num + ".json"
-axios.get(jsonUrl)
-  .then(response => {
-    data.value = response.data
-  })
-  .catch(error => {
-    console.log(error)
-  })
+const props = defineProps(['data'])
 
 const numArray = function (totalNum, nowNum) {
   let numList = []
@@ -50,9 +20,9 @@ const numArray = function (totalNum, nowNum) {
   <el-card class="card" body-style="padding: 0">
     <template #header>
       <div class="card-header-font">
-        <a class="text-body text-decoration-none" :href="'https://www.bilibili.com/video/' + data['bvid']"
+        <a class="text-body text-decoration-none" :href="'https://www.bilibili.com/video/' + props.data['bvid']"
           target="_blank">
-          {{ '乐正绫新曲排行榜#' + props.num }}
+          {{ '乐正绫新曲排行榜#' + props.data['num'] }}
         </a>
       </div>
 
@@ -63,7 +33,7 @@ const numArray = function (totalNum, nowNum) {
         <template #dropdown>
           <el-dropdown-menu>
             <el-scrollbar max-height="400px">
-              <el-dropdown-item v-for="i in numArray(data['total_num'], data['num'])">
+              <el-dropdown-item v-for="i in numArray(props.data['total_num'], props.data['num'])">
                 <router-link :to="{ name: 'weekly', params: { num: i } }" class="text-body text-decoration-none">
                   {{ '乐正绫新曲排行榜#' + i }}
                 </router-link>
@@ -77,11 +47,11 @@ const numArray = function (totalNum, nowNum) {
 
     <el-tabs type="border-card" :stretch="true" class="tabs">
       <el-tab-pane label="主榜">
-        <BaseInfo :data="data['zb']" />
+        <BaseInfo :data="props.data['zb']" />
       </el-tab-pane>
       <el-tab-pane label="PICK UP">
         <template v-if="data['pk_flag']">
-          <BaseInfo :data="data['pk']" />
+          <BaseInfo :data="props.data['pk']" />
         </template>
         <template v-else>
           <el-empty description="本期无新曲推荐" />
@@ -89,7 +59,7 @@ const numArray = function (totalNum, nowNum) {
       </el-tab-pane>
       <el-tab-pane label="副榜">
         <template v-if="data['fb_flag']">
-          <BaseInfo :data="data['fb']" />
+          <BaseInfo :data="props.data['fb']" />
         </template>
         <template v-else>
           <el-empty description="本期稿件过少，无副榜" />

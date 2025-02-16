@@ -1,13 +1,44 @@
 <script setup>
-import BaseHeader from './BaseHeader.vue';
-import BaseMain from './BaseMain.vue';
-import BaseAsider from './BaseAsider.vue';
+import { ref, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import axios from "axios"
+import BaseHeader from './BaseHeader.vue'
+import BaseMain from './BaseMain.vue'
+import BaseAsider from './BaseAsider.vue'
 
-const props = defineProps({
-  num: {
-    type: Number,
-    required: true
-  }
+const route = useRoute()
+const router = useRouter()
+const loading = ref(true)
+const data = ref(null)
+const num = ref(null)
+
+const getData = async () => {
+  await axios.get(`/data/1.json`)
+    .then(response => {
+      const totolNum = response.data['total_num']
+      num.value = route.params.num ? route.params.num : totolNum
+      if (num.value > totolNum)
+        router.push({ name: 'NotFound' })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+  await axios.get(`/data/${num.value}.json`)
+    .then(response => {
+      data.value = response.data
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+watch(() => route.params.num, () => {
+  getData()
+})
+
+onMounted(() => {
+  getData()
 })
 
 </script>
@@ -20,13 +51,13 @@ const props = defineProps({
         <BaseHeader />
       </router-link>
     </el-header>
-    <el-container class="main-aside-layout">
-        <el-main class="main-layout">
-          <BaseMain :num="num" />
-        </el-main>
-        <el-aside class="aside-layout hidden-sm-and-down">
-          <BaseAsider :num="num" />
-        </el-aside>
+    <el-container v-if="data" v-loading="!data" class="main-aside-layout">
+      <el-main class="main-layout">
+        <BaseMain :data="data" />
+      </el-main>
+      <el-aside class="aside-layout hidden-sm-and-down">
+        <BaseAsider :data="data" />
+      </el-aside>
     </el-container>
   </el-container>
 </template>
