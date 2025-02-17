@@ -3,7 +3,5 @@ import BaseFrame from '@/components/BaseFrame.vue';
 </script>
 
 <template>
-  <main>
-    <BaseFrame />
-  </main>
+  <BaseFrame />
 </template>

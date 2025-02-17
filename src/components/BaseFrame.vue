@@ -16,7 +16,7 @@ const getData = async () => {
     .then(response => {
       const totolNum = response.data['total_num']
       num.value = route.params.num ? route.params.num : totolNum
-      if (num.value > totolNum)
+      if (num.value > totolNum || num.value < 1)
         router.push({ name: 'NotFound' })
     })
     .catch(error => {

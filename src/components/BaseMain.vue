@@ -5,11 +5,10 @@ import BaseInfo from './BaseInfo.vue';
 
 const props = defineProps(['data'])
 
-const numArray = function (totalNum, nowNum) {
+const numArray = (totalNum) => {
   let numList = []
   for (let i = 1; i <= totalNum; i++) {
-    if (i != nowNum)
-      numList.push(i)
+    numList.push(i)
   }
   return numList.reverse()
 }
@@ -17,15 +16,12 @@ const numArray = function (totalNum, nowNum) {
 </script>
 
 <template>
-  <el-card class="card" body-style="padding: 0">
+  <el-card shadow="never" body-style="padding: 0;">
     <template #header>
-      <div class="card-header-font">
-        <a class="text-body text-decoration-none" :href="'https://www.bilibili.com/video/' + props.data['bvid']"
-          target="_blank">
-          {{ '乐正绫新曲排行榜#' + props.data['num'] }}
-        </a>
-      </div>
-
+      <el-link class="title" :underline="false" :href="`https://www.bilibili.com/video/${props.data['bvid']}`"
+        target="_blank">
+        {{ `乐正绫新曲排行榜#${props.data['num']}` }}
+      </el-link>
       <el-dropdown class="card-dropdown hidden-md-and-up">
         <span class="el-dropdown-link card-dropdown-font">
           往期<el-icon class="el-icon--right"><arrow-down /></el-icon>
@@ -33,8 +29,9 @@ const numArray = function (totalNum, nowNum) {
         <template #dropdown>
           <el-dropdown-menu>
             <el-scrollbar max-height="400px">
-              <el-dropdown-item v-for="i in numArray(props.data['total_num'], props.data['num'])">
-                <router-link :to="{ name: 'weekly', params: { num: i } }" class="text-body text-decoration-none">
+              <el-dropdown-item v-for="i in numArray(props.data['total_num'])">
+                <router-link :class="i !== props.data['num'] ? 'card-dropdown-link' : 'card-dropdown-link-now'"
+                  :to="{ name: 'weekly', params: { num: i } }">
                   {{ '乐正绫新曲排行榜#' + i }}
                 </router-link>
               </el-dropdown-item>
@@ -42,7 +39,6 @@ const numArray = function (totalNum, nowNum) {
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-
     </template>
 
     <el-tabs type="border-card" :stretch="true" class="tabs">
@@ -70,10 +66,15 @@ const numArray = function (totalNum, nowNum) {
   </el-card>
 </template>
 
-<style>
-.card-header-font {
-  font-weight: 800;
+<style scoped>
+.title {
+  font-weight: 600;
   font-size: large;
+  color: black;
+}
+
+.title:hover {
+  color: #ff7f7f;
 }
 
 .card-dropdown {
@@ -90,15 +91,26 @@ const numArray = function (totalNum, nowNum) {
   outline: none;
 }
 
-.tabs>.el-tabs__content {
-  padding: 0;
+.card-dropdown-link {
+  color: var(--el-text-color-regular);
+  text-decoration: none;
 }
 
-.tabs>.el-tabs__header .el-tabs__item:hover {
-  color: #ff7f7f !important;
+.card-dropdown-link-now {
+  color: #ff7f7f;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-.tabs>.el-tabs__header .el-tabs__item.is-active {
+.tabs {
+  border: none;
+}
+
+.tabs :deep(.el-tabs__header) .el-tabs__item:hover {
+  color: #ff7f7f;
+}
+
+.tabs :deep(.el-tabs__header) .el-tabs__item.is-active {
   color: #ff7f7f;
 }
 </style>
