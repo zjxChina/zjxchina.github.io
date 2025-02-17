@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
 import 'element-plus/theme-chalk/display.css'
 
 import { createApp } from 'vue'
