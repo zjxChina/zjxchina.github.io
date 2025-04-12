@@ -2,9 +2,9 @@
     "issue_number": 34,
     "total_issue_number": 97,
     "bvid": "BV1sc411x7ye",
-    "fb_flag": 1,
+    "sub_chart_flag": 1,
     "pk_flag": 1,
-    "zb": [
+    "main_chart": [
         {
             "aid": 241418738,
             "bvid": "BV1Ge411p7i3",
@@ -426,7 +426,7 @@
             "url": "https://www.bilibili.com/video/BV1LK411a74L"
         }
     ],
-    "fb": [
+    "sub_chart": [
         {
             "aid": 241270587,
             "bvid": "BV1se411H7D5",
