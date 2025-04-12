@@ -12,11 +12,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <el-card v-for="(item, index) in data" :key="index"
-    :class="index !== data.length - 1 ? 'info-card info-card-normal' : 'info-card info-card-last'" shadow="never">
+  <el-card v-for="(item, rank) in data" :key="rank"
+    :class="rank !== data.length - 1 ? 'info-card info-card-normal' : 'info-card info-card-last'" shadow="never">
     <el-row align="middle">
       <el-col :span="3" align="middle">
-        <div class="rank">{{ item['index'] }}</div>
+        <div class="rank">{{ item['rank'] }}</div>
       </el-col>
       <el-col :span="13" :xs="21">
         <el-descriptions class="descriptions" :column="3">
