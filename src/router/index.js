@@ -9,7 +9,7 @@ const router = createRouter({
       component: () => import('@/views/HomeView.vue')
     },
     {
-      path: '/weekly/:num',
+      path: '/weekly/:issueNumber',
       name: 'weekly',
       component: () => import('@/views/HomeView.vue')
     },

@@ -9,21 +9,21 @@ import BaseAsider from './BaseAsider.vue'
 const route = useRoute()
 const router = useRouter()
 const data = ref(null)
-const num = ref(null)
+const issueNumber = ref(null)
 
 const getData = async () => {
   await axios.get(`/data/1.json`)
     .then(response => {
-      const totolNum = response.data['total_num']
-      num.value = route.params.num ? route.params.num : totolNum
-      if (num.value > totolNum || num.value < 1)
+      const totolNum = response.data['total_issue_number']
+      issueNumber.value = route.params.issueNumber ? route.params.issueNumber : totolNum
+      if (issueNumber.value > totolNum || issueNumber.value < 1)
         router.push({ name: 'NotFound' })
     })
     .catch(error => {
       console.log(error)
     })
 
-  await axios.get(`/data/${num.value}.json`)
+  await axios.get(`/data/${issueNumber.value}.json`)
     .then(response => {
       data.value = response.data
     })
@@ -32,7 +32,7 @@ const getData = async () => {
     })
 }
 
-watch(() => route.params.num, () => {
+watch(() => route.params.issueNumber, () => {
   getData()
 })
 

@@ -5,12 +5,12 @@ import BaseInfo from './BaseInfo.vue';
 
 const props = defineProps(['data'])
 
-const numArray = (totalNum) => {
-  let numList = []
+const issueNumberArray = (totalNum) => {
+  let issueNumberList = []
   for (let i = 1; i <= totalNum; i++) {
-    numList.push(i)
+    issueNumberList.push(i)
   }
-  return numList.reverse()
+  return issueNumberList.reverse()
 }
 
 </script>
@@ -20,7 +20,7 @@ const numArray = (totalNum) => {
     <template #header>
       <el-link class="title" :underline="false" :href="`https://www.bilibili.com/video/${props.data['bvid']}`"
         target="_blank">
-        {{ `乐正绫新曲排行榜#${props.data['num']}` }}
+        {{ `乐正绫新曲排行榜#${props.data['issue_number']}` }}
       </el-link>
       <el-dropdown class="card-dropdown hidden-md-and-up">
         <span class="el-dropdown-link card-dropdown-font">
@@ -29,9 +29,9 @@ const numArray = (totalNum) => {
         <template #dropdown>
           <el-dropdown-menu>
             <el-scrollbar max-height="400px">
-              <el-dropdown-item v-for="i in numArray(props.data['total_num'])">
-                <router-link :class="i !== props.data['num'] ? 'card-dropdown-link' : 'card-dropdown-link-now'"
-                  :to="{ name: 'weekly', params: { num: i } }">
+              <el-dropdown-item v-for="i in issueNumberArray(props.data['total_issue_number'])">
+                <router-link :class="i !== props.data['issue_number'] ? 'card-dropdown-link' : 'card-dropdown-link-now'"
+                  :to="{ name: 'weekly', params: { issueNumber: i } }">
                   {{ '乐正绫新曲排行榜#' + i }}
                 </router-link>
               </el-dropdown-item>
@@ -43,7 +43,7 @@ const numArray = (totalNum) => {
 
     <el-tabs type="border-card" :stretch="true" class="tabs">
       <el-tab-pane label="主榜">
-        <BaseInfo :data="props.data['zb']" />
+        <BaseInfo :data="props.data['main_chart']" />
       </el-tab-pane>
       <el-tab-pane label="PICK UP">
         <template v-if="data['pk_flag']">
@@ -54,8 +54,8 @@ const numArray = (totalNum) => {
         </template>
       </el-tab-pane>
       <el-tab-pane label="副榜">
-        <template v-if="data['fb_flag']">
-          <BaseInfo :data="props.data['fb']" />
+        <template v-if="data['sub_chart_flag']">
+          <BaseInfo :data="props.data['sub_chart']" />
         </template>
         <template v-else>
           <el-empty description="本期稿件过少，无副榜" />
